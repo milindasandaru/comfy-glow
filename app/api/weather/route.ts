@@ -65,11 +65,11 @@ export async function GET() {
         weatherCache[cityCode] &&
         currentTime - weatherCache[cityCode].timestamp < CACHE_DURATION
       ) {
-        console.log(`🔥 CACHE HIT: ${city.CityName}`);
+        console.log(`CACHE HIT: ${city.CityName}`);
         return weatherCache[cityCode].data;
       }
 
-      console.log(`💨 API FETCH: ${city.CityName}`);
+      console.log(`API FETCH: ${city.CityName}`);
 
       // Fetch weather data from OpenWeatherMap
       // explicit type for axios response avoids 'any'
