@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-        --background: 210 40% 98%;
-        --foreground: 222 47% 11%;
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
     --primary: 199 89% 48%;
     --muted: 215 20% 90%;
     --muted-foreground: 215 16% 47%;
-    
+
     /* Glassmorphism Tokens */
     --glass-bg: 0 0% 100% / 0.7;
     --glass-border: 255 255 255 / 0.5;
@@ -19,10 +19,10 @@
     --comfort-good: 142 71% 45%;
     --comfort-medium: 45 93% 47%;
     --comfort-poor: 0 84% 60%;
-    }
+  }
 
-    .dark {
-        --background: 222 47% 6%;
+  .dark {
+    --background: 222 47% 6%;
     --foreground: 210 40% 98%;
     --primary: 199 89% 48%;
     --muted: 217 33% 17%;
@@ -32,21 +32,21 @@
     --glass-bg: 217 33% 12% / 0.5;
     --glass-border: 255 255 255 / 0.08;
     --glass-shadow: 0 0 0 / 0;
-    }
+  }
 }
 
 @layer base {
-    body {
-        @apply bg-background text-foreground antialiased transition-colors duration-300;
-    }
+  body {
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
+  }
 }
 
 @layer components {
-    .glass-card {
-        @apply backdrop-blur-md bg-[hsl(var(--glass-bg))] border border-[rgb(var(--glass-border))] shadow-xl transition-all duration-300;
-    }
+  .glass-card {
+    @apply backdrop-blur-md bg-[hsl(var(--glass-bg))] border border-[rgb(var(--glass-border))] shadow-xl transition-all duration-300;
+  }
 
-    /* Neon Glows for Comfort Levels */
+  /* Neon Glows for Comfort Levels */
   /* .glow-good {
     box-shadow: 0 0 20px hsl(var(--comfort-good) / 0.3);
     border-color: hsl(var(--comfort-good) / 0.5);
