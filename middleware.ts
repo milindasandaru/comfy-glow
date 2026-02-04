@@ -1,3 +1,3 @@
-export function middleware(request: Request) {
+export function middleware() {
   //middleware.ts
 }

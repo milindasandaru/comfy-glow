@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Search, LogOut, SunMoon } from "lucide-react";
+// import Navbar from "@/components/layout/Navbar";
+// import FloatingNavbar from "@/components/layout/FloatingNavbar";
 import CityCard from "@/components/weather/CityCard";
 import CityDetailsModal from "@/components/weather/CityDetails";
+// import SearchBar from "@/components/logic/SearchBart";
 
 // types
 interface WeatherData {
@@ -58,95 +60,79 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-12 transition-colors duration-300">
-      {/** navbar */}
-      <nav className="flex items-center justify-between mb-12 animate-in fade-in slide-in-from-top-4 duration-500">
-        <div className="flex items-center gap-3">
-          <div className="bg-primary/20 p-2 rouded-xl backdrop-blur-md border border-pimary/20">
-            <SunMoon className="h-6 w-6 text-primary" />
-          </div>
-          <span className="text-2xl font-bold tracking-tight">
-            Fidenz Analytics
-          </span>
-        </div>
+    <div className="min-h-screen bg-background transition-colors duration-300">
+      {/* <Navbar /> */}
 
-        {/** Logout */}
-        <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary/50 border border-border hover:bg-secondary transition-all text-sm font-medium">
-          <LogOut className="h-4 w-4" />
-          <span>Logout</span>
-        </button>
-      </nav>
+      <div className="p-6 md:p-12">
+        {/** Hero Section */}
+        <div className="max-w-7xl mx-auto mb-12 text-center space-y-6 animate-in fade-in duration-700">
+          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50">
+            Global Comfort Index
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Explore real-time comfort levels across major cities worldwide. Stay
+            informed and plan your day with confidence.
+          </p>
 
-      {/** Hero Section */}
-      <div className="max-w-7xl mx-auto mb-12 text-center space-y-6 animate-in fade-in duration-700">
-        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50">
-          Global Comfort Index
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Explore real-time comfort levels across major cities worldwide. Stay
-          informed and plan your day with confidence.
-        </p>
-
-        {/** Search Bar */}
-        <div className="relative max-w-md mx-auto group">
-          <div className="relative flex items-center">
-            <Search className="absolute left-4 h-5 w-5 text-muted-foreground" />
+          {/** Search Bar */}
+          <div className="flex justify-center">
             <input
-              type="text"
-              placeholder="Search cities..."
-              className="w-full bg-secondary/30 backdrop-blur-xl border border-border rounded-2xl py-4 pl-12 pr-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all shadow-lg"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search cities..."
+              className="w-full max-w-md bg-secondary/30 backdrop-blur-xl border border-border rounded-2xl py-3 px-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
             />
           </div>
         </div>
-      </div>
 
-      {/** Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-        {/** Loading skeletons */}
-        {loading &&
-          [1, 2, 3, 4, 5, 6].map((i) => (
-            <div
-              key={i}
-              className="h-64 rouded-2xl bg-secondary/50 animate border border-border"
-            />
-          ))}
-
-        {/** City Cards */}
-        {!loading &&
-          filteredCities.map((city, index) => (
-            <div
-              key={city.id}
-              className="animate-in fade-in slide-in-from-bottom-4"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <CityCard
-                cityName={city.name}
-                temperature={city.temp}
-                weatherDescription={city.description}
-                comfortIndex={city.comfortScore}
-                rank={city.rank}
-                weatherIcon={getIconType(city.icon)}
-                onclick={() => setSelectedCity(city)}
+        {/** Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {/** Loading skeletons */}
+          {loading &&
+            [1, 2, 3, 4, 5, 6].map((i) => (
+              <div
+                key={i}
+                className="h-64 rounded-2xl bg-secondary/50 animate-pulse border border-border"
               />
-            </div>
-          ))}
-      </div>
+            ))}
 
-      {/** Empty state */}
-      {!loading && filteredCities.length === 0 && (
-        <div className="text-center py-20 text-muted-foreground">
-          No cities found matching "{search}".
+          {/** City Cards */}
+          {!loading &&
+            filteredCities.map((city, index) => (
+              <div
+                key={city.id}
+                className="animate-in fade-in slide-in-from-bottom-4"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <CityCard
+                  cityName={city.name}
+                  temperature={city.temp}
+                  weatherDescription={city.description}
+                  comfortIndex={city.comfortScore}
+                  rank={city.rank}
+                  weatherIcon={getIconType(city.icon)}
+                  onClick={() => setSelectedCity(city)}
+                />
+              </div>
+            ))}
         </div>
-      )}
 
-      {/** Detail modal */}
-      <CityDetailsModal
-        city={selectedCity}
-        isOpen={!!selectedCity}
-        onClose={() => setSelectedCity(null)}
-      />
+        {/** Empty state */}
+        {!loading && filteredCities.length === 0 && (
+          <div className="text-center py-20 text-muted-foreground">
+            No cities found matching &quot;{search}&quot;.
+          </div>
+        )}
+
+        {/** Detail modal */}
+        <CityDetailsModal
+          city={selectedCity}
+          isOpen={!!selectedCity}
+          onClose={() => setSelectedCity(null)}
+        />
+
+        {/* <FloatingNavbar /> */}
+      </div>
     </div>
   );
 }
