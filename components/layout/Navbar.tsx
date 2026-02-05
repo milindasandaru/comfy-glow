@@ -1,54 +1,122 @@
-// import React from 'react';
-// import { Moon, Sun, LogOut, Cloud } from 'lucide-react';
-// import { useTheme } from '@/contexts/ThemeContext';
-// import { Button } from '@/components/ui/button';
-// import { useNavigate } from 'react-router-dom';
+"use client";
 
-// const Navbar: React.FC = () => {
-//   const { theme, toggleTheme } = useTheme();
-//   const navigate = useNavigate();
+import type { ComponentType } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import {
+  Cloud,
+  LogIn,
+  LogOut,
+  Moon,
+  Sun,
+  LayoutDashboard,
+  Home,
+} from "lucide-react";
 
-//   const handleLogout = () => {
-//     navigate('/login');
-//   };
+function NavLink({
+  href,
+  label,
+  active,
+  icon: Icon,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+  icon: ComponentType<{ className?: string }>;
+}) {
+  return (
+    <Link
+      href={href}
+      className={
+        "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors " +
+        (active
+          ? "bg-secondary text-foreground"
+          : "text-muted-foreground hover:text-foreground hover:bg-secondary/60")
+      }
+    >
+      <Icon className="h-4 w-4" />
+      <span className="hidden sm:inline">{label}</span>
+    </Link>
+  );
+}
 
-//   return (
-//     <nav className="glass-card sticky top-0 z-50 px-6 py-4">
-//       <div className="container mx-auto flex items-center justify-between">
-//         <div className="flex items-center gap-3">
-//           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-//             <Cloud className="h-5 w-5 text-primary-foreground" />
-//           </div>
-//           <h1 className="text-xl font-semibold text-foreground">
-//             Weather Analytics
-//           </h1>
-//         </div>
+export default function Navbar() {
+  const pathname = usePathname();
+  const { user, isLoading } = useUser();
+  const { theme, setTheme } = useTheme();
 
-//         <div className="flex items-center gap-3">
-//           <Button
-//             variant="ghost"
-//             size="icon"
-//             onClick={toggleTheme}
-//             className="rounded-xl hover:bg-secondary"
-//           >
-//             {theme === 'dark' ? (
-//               <Sun className="h-5 w-5 text-foreground" />
-//             ) : (
-//               <Moon className="h-5 w-5 text-foreground" />
-//             )}
-//           </Button>
-//           <Button
-//             variant="ghost"
-//             onClick={handleLogout}
-//             className="rounded-xl hover:bg-secondary gap-2"
-//           >
-//             <LogOut className="h-4 w-4" />
-//             <span className="hidden sm:inline">Logout</span>
-//           </Button>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
+  const isDark = (theme ?? "dark") === "dark";
 
-// export default Navbar;
+  return (
+    <header className="sticky top-0 z-50 border-b border-border bg-background/70 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <Cloud className="h-5 w-5" />
+            </span>
+            <span className="font-semibold tracking-tight">Comfy Glow</span>
+          </Link>
+
+          <div className="hidden md:flex items-center gap-2 ml-2">
+            <NavLink
+              href="/"
+              label="Home"
+              icon={Home}
+              active={pathname === "/"}
+            />
+            <NavLink
+              href="/dashboard"
+              label="Dashboard"
+              icon={LayoutDashboard}
+              active={pathname?.startsWith("/dashboard") ?? false}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-secondary/40 text-foreground hover:bg-secondary/70 transition-colors"
+            aria-label="Toggle theme"
+            title="Toggle theme"
+          >
+            {isDark ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </button>
+
+          {isLoading ? (
+            <div className="h-10 w-24 rounded-xl bg-secondary/50 animate-pulse" />
+          ) : user ? (
+            <div className="flex items-center gap-2">
+              <span className="hidden lg:inline text-xs text-muted-foreground max-w-48 truncate">
+                {user.email ?? user.name ?? "Signed in"}
+              </span>
+              <Link
+                href="/api/auth/logout"
+                className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-secondary/40 hover:bg-secondary/70 border border-border transition-colors"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Logout</span>
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href="/api/auth/login?returnTo=%2Fdashboard"
+              className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              <LogIn className="h-4 w-4" />
+              <span className="hidden sm:inline">Login</span>
+            </Link>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}

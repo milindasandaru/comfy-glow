@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Globe } from "lucide-react";
 
 export default function Home() {
+  const showBypass = process.env.NODE_ENV === "development";
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-background selection:bg-primary/20">
       {/** Background gradients */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] animate-pulse delay-1000" />
+      <div className="absolute top-[-20%] left-[-10%] w-125 h-125 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-125 h-125 bg-purple-500/20 rounded-full blur-[120px] animate-pulse delay-1000" />
 
       {/** Main content */}
       <div className="z-10 w-full max-w-4xl px-6 text-center space-y-8">
@@ -23,7 +25,7 @@ export default function Home() {
 
         {/** Hero text */}
         <div className="space-y-4 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-foreground to-foreground/50">
             Fidenz Analytics
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -59,20 +61,21 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-12 animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-300">
           {/* THE LOGIN BUTTON (We will wire this to Auth0 later) */}
           <Link
-            href="/api/auth/login"
+            href="/api/auth/login?returnTo=%2Fdashboard"
             className="px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-primary/25"
           >
             Login with Fidenz
             <ArrowRight className="h-5 w-5" />
           </Link>
 
-          {/* TEMPORARY BYPASS BUTTON (For Testing Only) */}
-          <Link
-            href="/dashboard"
-            className="px-8 py-4 rounded-2xl bg-secondary hover:bg-secondary/80 transition-all text-muted-foreground font-medium text-sm"
-          >
-            Bypass Login (Dev Mode)
-          </Link>
+          {showBypass ? (
+            <Link
+              href="/dashboard"
+              className="px-8 py-4 rounded-2xl bg-secondary hover:bg-secondary/80 transition-all text-muted-foreground font-medium text-sm"
+            >
+              Bypass Login (Dev Mode)
+            </Link>
+          ) : null}
         </div>
       </div>
 
