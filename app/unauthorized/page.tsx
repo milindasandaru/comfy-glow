@@ -16,12 +16,12 @@ export default function UnauthorizedPage() {
           >
             Back to home
           </Link>
-          <Link
+          <a
             href="/api/auth/logout"
             className="px-4 py-2 rounded-xl bg-primary/20 text-primary hover:bg-primary/30 transition-colors text-sm font-medium"
           >
             Logout
-          </Link>
+          </a>
         </div>
       </div>
     </div>

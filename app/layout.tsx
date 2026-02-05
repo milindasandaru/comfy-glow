@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Comfy Glow — Comfort Index Dashboard",
+  title: "Fidenz Analytics — Comfort Index Dashboard",
   description:
     "Comfort Index dashboard powered by OpenWeather and Auth0-protected access.",
 };

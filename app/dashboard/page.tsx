@@ -4,6 +4,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CityCard from "@/components/weather/CityCard";
 import CityDetailsModal from "@/components/weather/CityDetails";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // types
 interface WeatherData {
@@ -126,24 +133,27 @@ export default function Dashboard() {
             className="w-full max-w-md bg-secondary/30 backdrop-blur-xl border border-border rounded-2xl py-3 px-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
           />
 
-          <select
+          <Select
             value={sortBy}
-            onChange={(e) =>
-              setSortBy(
-                e.target.value as
-                  | "rank"
-                  | "temp-desc"
-                  | "temp-asc"
-                  | "name-asc",
-              )
+            onValueChange={(value) =>
+              setSortBy(value as "rank" | "temp-desc" | "temp-asc" | "name-asc")
             }
-            className="w-full sm:w-56 bg-secondary/30 backdrop-blur-xl border border-border rounded-2xl py-3 px-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
           >
-            <option value="rank">Sort: Rank (Comfort)</option>
-            <option value="temp-desc">Sort: Temperature (High → Low)</option>
-            <option value="temp-asc">Sort: Temperature (Low → High)</option>
-            <option value="name-asc">Sort: City Name (A → Z)</option>
-          </select>
+            <SelectTrigger className="w-full sm:w-72 h-12 bg-secondary/30 backdrop-blur-xl border border-border rounded-2xl px-4 text-foreground focus:ring-2 focus:ring-primary/50 transition-all">
+              <SelectValue placeholder="Sort" />
+            </SelectTrigger>
+            <SelectContent
+              align="end"
+              className="w-[--radix-select-trigger-width]"
+            >
+              <SelectItem value="rank">Rank (Comfort)</SelectItem>
+              <SelectItem value="temp-desc">
+                Temperature (High → Low)
+              </SelectItem>
+              <SelectItem value="temp-asc">Temperature (Low → High)</SelectItem>
+              <SelectItem value="name-asc">City Name (A → Z)</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
