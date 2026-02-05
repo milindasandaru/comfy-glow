@@ -100,7 +100,7 @@ export default function Navbar() {
               <span className="hidden lg:inline text-xs text-muted-foreground max-w-48 truncate">
                 {user.email ?? user.name ?? "Signed in"}
               </span>
-              {/* NOTE: Auth0 routes behave best with a normal full-page nav. */}
+              {/* Auth0 endpoints: use a normal full page navigation. */}
               <a
                 href="/api/auth/logout"
                 className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-secondary/40 hover:bg-secondary/70 border border-border transition-colors"
@@ -110,7 +110,7 @@ export default function Navbar() {
               </a>
             </div>
           ) : (
-            /* NOTE: Keep this as <a> to avoid Next.js client routing noise. */
+            /* Auth0 endpoints: keep this as <a> (no client routing). */
             <a
               href="/api/auth/login?returnTo=%2Fdashboard"
               className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-primary text-primary-foreground hover:opacity-90 transition-opacity"

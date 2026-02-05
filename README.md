@@ -12,7 +12,7 @@ npm install
 
 ### 2) Environment
 
-Create `.env.local`:
+Copy [.env.example](.env.example) to `.env.local`:
 
 ```bash
 OPENWEATHER_API_KEY=...your key...
