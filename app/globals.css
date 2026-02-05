@@ -198,22 +198,22 @@
   .glass-card-comfort-good {
     border-color: hsl(var(--comfort-good));
     box-shadow:
-      0 0 20px hsl(var(--comfort-good-glow)),
-      0 8px 32px hsl(var(--glass-shadow));
+      0 0 10px hsl(var(--comfort-good-glow)),
+      0 6px 24px hsl(var(--glass-shadow));
   }
 
   .glass-card-comfort-medium {
     border-color: hsl(var(--comfort-medium));
     box-shadow:
-      0 0 20px hsl(var(--comfort-medium-glow)),
-      0 8px 32px hsl(var(--glass-shadow));
+      0 0 10px hsl(var(--comfort-medium-glow)),
+      0 6px 24px hsl(var(--glass-shadow));
   }
 
   .glass-card-comfort-poor {
     border-color: hsl(var(--comfort-poor));
     box-shadow:
-      0 0 20px hsl(var(--comfort-poor-glow)),
-      0 8px 32px hsl(var(--glass-shadow));
+      0 0 10px hsl(var(--comfort-poor-glow)),
+      0 6px 24px hsl(var(--glass-shadow));
   }
 
   .gradient-bg {

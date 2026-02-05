@@ -50,9 +50,7 @@ export const calculateComfortIndex = (
 
   // Score logic:
   // 0 deviation = 100 score
-  // 30 degree deviation = 0 score
-  // I use a weighting of 3.33 to map 0-30 deviation to 100-0 score
-  //const score = 100 - deviation * 3.5;
+  // Score decreases by 2 points per 1°F deviation from the ideal.
   const score = 100 - deviation * 2.0;
 
   // Clamp and return

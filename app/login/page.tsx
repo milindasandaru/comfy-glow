@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground p-6">
+    <div className="min-h-full flex items-center justify-center p-6">
       <div className="w-full max-w-md rounded-2xl border border-border bg-secondary/30 backdrop-blur-xl p-6">
         <h1 className="text-2xl font-bold">Login</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          UI placeholder. We can wire this to Auth0 next.
+          Sign in with Auth0 to access the Comfort Index dashboard.
         </p>
 
         <div className="mt-6 flex items-center justify-between">
@@ -17,12 +17,25 @@ export default function LoginPage() {
             Back
           </Link>
           <Link
-            href="/dashboard"
-            className="px-4 py-2 rounded-xl bg-primary/20 text-primary hover:bg-primary/30 transition-colors text-sm font-medium"
+            href="/api/auth/login?returnTo=%2Fdashboard"
+            className="px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-colors text-sm font-medium"
           >
-            Continue
+            Login
           </Link>
         </div>
+
+        <div className="mt-4">
+          <Link
+            href="/api/auth/logout"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Logout
+          </Link>
+        </div>
+
+        <p className="mt-6 text-xs text-muted-foreground">
+          After login you will be redirected back to the page you requested.
+        </p>
       </div>
     </div>
   );
