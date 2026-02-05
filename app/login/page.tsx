@@ -16,21 +16,21 @@ export default function LoginPage() {
           >
             Back
           </Link>
-          <Link
+          <a
             href="/api/auth/login?returnTo=%2Fdashboard"
             className="px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-colors text-sm font-medium"
           >
             Login
-          </Link>
+          </a>
         </div>
 
         <div className="mt-4">
-          <Link
+          <a
             href="/api/auth/logout"
             className="text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
             Logout
-          </Link>
+          </a>
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">

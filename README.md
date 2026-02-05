@@ -1,4 +1,4 @@
-## Comfy Glow — Comfort Index Dashboard
+## Fidenz Analytics — Comfort Index Dashboard
 
 Next.js App Router project that fetches live city weather from OpenWeather, computes a **Comfort Index (0–100)**, ranks cities, and displays a responsive dashboard.
 

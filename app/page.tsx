@@ -1,9 +1,6 @@
-import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Globe } from "lucide-react";
 
 export default function Home() {
-  const showBypass = process.env.NODE_ENV === "development";
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-background selection:bg-primary/20">
       {/** Background gradients */}
@@ -60,22 +57,26 @@ export default function Home() {
         {/** Get Started Button */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-12 animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-300">
           {/* THE LOGIN BUTTON (We will wire this to Auth0 later) */}
-          <Link
+          <a
             href="/api/auth/login?returnTo=%2Fdashboard"
             className="px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-primary/25"
           >
             Login with Fidenz
             <ArrowRight className="h-5 w-5" />
-          </Link>
+          </a>
 
-          {showBypass ? (
-            <Link
-              href="/dashboard"
-              className="px-8 py-4 rounded-2xl bg-secondary hover:bg-secondary/80 transition-all text-muted-foreground font-medium text-sm"
-            >
-              Bypass Login (Dev Mode)
-            </Link>
-          ) : null}
+          {/*
+            Bypass login (dev-only) intentionally disabled.
+            Re-enable locally if you ever need quick dashboard access without Auth0.
+          */}
+          {/*
+          <Link
+            href="/dashboard"
+            className="px-8 py-4 rounded-2xl bg-secondary hover:bg-secondary/80 transition-all text-muted-foreground font-medium text-sm"
+          >
+            Bypass Login (Dev Mode)
+          </Link>
+          */}
         </div>
       </div>
 

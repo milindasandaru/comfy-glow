@@ -57,7 +57,9 @@ export default function Navbar() {
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
               <Cloud className="h-5 w-5" />
             </span>
-            <span className="font-semibold tracking-tight">Comfy Glow</span>
+            <span className="font-semibold tracking-tight">
+              Fidenz Analytics
+            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-2 ml-2">
@@ -98,22 +100,22 @@ export default function Navbar() {
               <span className="hidden lg:inline text-xs text-muted-foreground max-w-48 truncate">
                 {user.email ?? user.name ?? "Signed in"}
               </span>
-              <Link
+              <a
                 href="/api/auth/logout"
                 className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-secondary/40 hover:bg-secondary/70 border border-border transition-colors"
               >
                 <LogOut className="h-4 w-4" />
                 <span className="hidden sm:inline">Logout</span>
-              </Link>
+              </a>
             </div>
           ) : (
-            <Link
+            <a
               href="/api/auth/login?returnTo=%2Fdashboard"
               className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
             >
               <LogIn className="h-4 w-4" />
               <span className="hidden sm:inline">Login</span>
-            </Link>
+            </a>
           )}
         </div>
       </div>
