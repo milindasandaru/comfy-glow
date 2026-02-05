@@ -64,19 +64,6 @@ export default function Home() {
             Login with Fidenz
             <ArrowRight className="h-5 w-5" />
           </a>
-
-          {/*
-            1) Dev-only shortcut is disabled on purpose.
-            2) Keeps the demo flow consistent (Auth0 always).
-          */}
-          {/*
-          <Link
-            href="/dashboard"
-            className="px-8 py-4 rounded-2xl bg-secondary hover:bg-secondary/80 transition-all text-muted-foreground font-medium text-sm"
-          >
-            Bypass Login (Dev Mode)
-          </Link>
-          */}
         </div>
       </div>
 
