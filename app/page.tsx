@@ -66,8 +66,8 @@ export default function Home() {
           </a>
 
           {/*
-            Bypass login (dev-only) intentionally disabled.
-            Re-enable locally if you ever need quick dashboard access without Auth0.
+            1) Dev-only shortcut is disabled on purpose.
+            2) Keeps the demo flow consistent (Auth0 always).
           */}
           {/*
           <Link
